@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    /*["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "react": "preact-compat",
+        "react-dom": "preact-compat"
+      }
+    }]*/
+  ],
+  "presets": ["es2015", "react", "stage-0"]
+}

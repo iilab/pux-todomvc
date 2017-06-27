@@ -1,15 +1,15 @@
-const appConfig = require('./src/App/Config.js').config
-const path = require('path')
-const webpack = require('webpack')
-const isProd = process.env.NODE_ENV === 'production'
+const appConfig = require('./src/App/Config.js').config;
+const path = require('path');
+const webpack = require('webpack');
+const isProd = process.env.NODE_ENV === 'production';
 
-const entries = [path.join(__dirname, 'support/entry.js')]
+const entries = [path.join(__dirname, 'support/entry.js')];
 
 const plugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   })
-]
+];
 
 if (isProd) {
   plugins.push(
@@ -17,7 +17,7 @@ if (isProd) {
       minimize: true,
       debug: false
     })
-  )
+  );
 }
 
 module.exports = {
@@ -35,31 +35,28 @@ module.exports = {
         test: /\.purs$/,
         loader: 'purs-loader',
         exclude: /node_modules/,
-        query: isProd ? {
-          bundle: true,
-          bundleOutput: 'static/dist/bundle.js'
-        } : {
-          psc: 'psa',
-          pscIde: true
-        }
+        query: isProd
+          ? {
+              bundle: true,
+              bundleOutput: 'static/dist/bundle.js'
+            }
+          : {
+              psc: 'psa',
+              pscIde: true
+            }
       }
-    ],
+    ]
   },
   plugins: plugins,
   resolveLoader: {
-    modules: [
-      path.join(__dirname, 'node_modules')
-    ]
+    modules: [path.join(__dirname, 'node_modules')]
   },
   resolve: {
     alias: {
-      'react': 'preact-compat',
+      react: 'preact-compat',
       'react-dom': 'preact-compat'
     },
-    modules: [
-      'node_modules',
-      'bower_components'
-    ],
+    modules: ['node_modules', 'bower_components'],
     extensions: ['.js', '.purs']
   },
   performance: { hints: false },
@@ -76,4 +73,4 @@ module.exports = {
     modules: false,
     chunkModules: false
   }
-}
+};

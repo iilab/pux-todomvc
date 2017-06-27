@@ -18,6 +18,8 @@ import Data.Maybe (Maybe(..), maybe)
 import Pux (EffModel, noEffects, onlyEffects)
 import Pux.DOM.Events (DOMEvent, targetValue)
 
+import Debug.Trace (spy)
+
 type TodoId = Int
 
 data Event
@@ -45,7 +47,7 @@ foldp (Navigate url ev) state =
   ]
 
 foldp (NewTodoInput ev) (State st) = noEffects $ State
-  if (eventToKeyPressed ev) == "Enter"
+  if (eventToKeyPressed $ spy $ ev) == "Enter"
     then st
       { newTodo = ""
       , todos = snoc st.todos $ Todo
