@@ -47,7 +47,7 @@ foldp (Navigate url ev) state =
   ]
 
 foldp (NewTodoInput ev) (State st) = noEffects $ State
-  if (eventToKeyPressed $ spy $ ev) == "Enter"
+  if (eventToKeyPressed ev) == "Enter"
     then st
       { newTodo = ""
       , todos = snoc st.todos $ Todo

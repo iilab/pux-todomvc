@@ -4,6 +4,8 @@ import Prelude hiding (div)
 import App.Routes (Route(..))
 import App.State (State(..), Todo(..))
 import App.Events (Event(..))
+import App.Component (list)
+
 import Data.Array (filter, length)
 import Data.Foldable (for_)
 import Data.Monoid (mempty)
@@ -58,7 +60,7 @@ view (State st) =
       section ! className "main" $ do
         input ! className "toggle-all" ! type' "checkbox"
         label ! for "toggle-all" $ text "Mark all as complete"
-        ul ! className "todo-list" $ do
+        list ! className "todo-list" $ do
           for_ filtered item
       if ((length st.todos) == 0) then mempty else footer ! className "footer" $ do
         span ! className "todo-count" $ do
